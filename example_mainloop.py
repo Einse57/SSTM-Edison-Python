@@ -1,6 +1,31 @@
+"""
+Copyright (c) 2015, Andrew Lamkin
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+
 #!/usr/bin/python
 
-import os.path
 import time
 import datetime
 from datetime import datetime
@@ -18,17 +43,12 @@ LOG_rate = 100      # 10 Hz = 1/10s = 0.1s = 100 milliseconds
 
 # Set up logging
 today = datetime.now()
-if (os.path.exists("/mnt/usbdrive/")):
-    log_name = "/mnt/usbdrive/" + today.strftime("%y%b%d_%H%M%S") + ".txt"
-else: 
-    log_name = today.strftime("%y%b%d_%H%M%S") + ".txt"
-
+log_name = today.strftime("%y%b%d_%H%M%S") + ".txt"
 log_file = open(log_name, "a")
-
 today = datetime.now()
-log_file.write("Bed sensor log for: ")
-log_file.write(str(today.strftime("%d-%b-%y @ %H:%M:%S")))
-log_file.write("\n")
+
+# Initial log write
+log_file.write("Sensor Log: " + str(today.strftime("%d-%b-%y @ %H:%M:%S")) + "\n")
 log_file.close()
 
 # Set up devices
@@ -70,7 +90,7 @@ sps = 250   # 250 samples per second
 # sps = 2400  # 2400 samples per second
 # sps = 3300  # 3300 samples per second
 
-print("**bedSensor active")
+print("**Sensor Logging Active")
 
 #### Main Work ####
 while True:
@@ -108,9 +128,9 @@ while True:
             LOG_lastlog = millis
         
     except KeyboardInterrupt:
-        #Shut down cleanly
+        #Try to shut down cleanly
         log_file.close()
-        print("**Closed down bedSensor")
+        print("**Closing Down Sensor Logging")
         break
     
 

@@ -1,4 +1,4 @@
-Copyright (c) 2015, Einse57
+Copyright (c) 2015, Andrew Lamkin, Einse57
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

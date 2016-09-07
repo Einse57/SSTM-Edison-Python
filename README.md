@@ -7,6 +7,4 @@ I found a lot of the existing code for Intel Edison and Sparkfun Edison Blocks t
 
 None of these would happen without the community at large, so please see each file for license and credit.
 
-I'm pretty new to GitHub, so please if you see a better way to do things, let me know.
-
 
